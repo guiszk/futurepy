@@ -11,7 +11,7 @@ Installation
 Usage
 -----
 
-::
+.. code:: python
 
    futurepy [options]
 
