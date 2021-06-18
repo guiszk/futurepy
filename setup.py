@@ -1,12 +1,13 @@
 import os
-from distutils.core import setup
+#from distutils.core import setup
+from setuptools import setup
 
 here = os.path.abspath(os.path.dirname(__file__))
 about = dict()
 with open(os.path.join(here, 'futurepy', '__version__.py'), 'r') as f:
     exec(f.read(), about)
 
-with open(os.path.join(here, 'README.rst'), 'r') as f:
+with open(os.path.join(here, 'README.md'), 'r') as f:
     long_description = f.read()
 
 try:
