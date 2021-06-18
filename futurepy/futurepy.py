@@ -13,6 +13,8 @@ Options:
                             Default: False
     -c --confirm            Display a preview of the message before sending
                             Default: False
+    --debug                 Print the request output in HTML.
+                            Default: False
     -h --help               Display this message.
 
 """
@@ -20,6 +22,7 @@ Options:
 import requests
 from docopt import docopt
 from logging import warnings
+from bs4 import BeautifulSoup as bs
 import time
 import re
 import os
@@ -34,6 +37,16 @@ def warn(x):
     #warnings.warn(x)
     sys.stderr.write(x+'\n')
     sys.exit(1)
+
+def post(debug, url, data):
+    res = requests.post(url, data=data)
+    if(debug):
+        print(res.text)
+    soup = bs(res.text, 'html.parser')
+    #print('>>' + str(soup.title.string).strip() + '<<')
+    for i in soup.find_all('article', {'class': 'notification is-danger'}):
+        warn(i.get_text().strip())
+
 
 def run(args):
     subject = args.get('--subject')
@@ -65,6 +78,7 @@ def run(args):
             warn('Invalid email.')
     public = args.get('--public')
     confirm = args.get('--confirm')
+    debug = args.get('--debug')
 
     url = 'https://api.futureme.org/letters'
     data = {
@@ -87,13 +101,13 @@ def run(args):
         print('Delivery: {}/{}/{}\n'.format(y, m, d))
         conf = input('Confirm? [Y/n] ')
         if(conf in 'Yy '):
+            post(debug, url, data)
             print('A confirmation link was sent to ' + email + '. See you in the future!')
-            res = requests.post(url, data=data)
         else:
             print('Exiting.')
     else:
+        post(debug, url, data)
         print('A confirmation link was sent to ' + email + '. See you in the future!')
-        res = requests.post(url, data=data)
 
 def main():
     args = docopt(__doc__, version=about['__version__'])

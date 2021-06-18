@@ -31,4 +31,3 @@ Example
 -------
 
 ``futurepy -s 'Message to the future' -b 'Hello, this will arrive in the future.' -d 20301009 -e email@mail.com -p``
-
