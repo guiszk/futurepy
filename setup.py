@@ -13,23 +13,23 @@ with open(os.path.join(here, 'README.md'), 'r') as f:
 try:
     download_path = sorted(os.listdir(os.path.join(here, 'dist')))[-1]
 except FileNotFoundError:
-    download_path = 'futurepy-0.0.1.tar.gz'
+    download_path = 'futurepy-0.0.2.tar.gz'
 except IndexError:
-    download_path = 'futurepy-0.0.1.tar.gz'
+    download_path = 'futurepy-0.0.2.tar.gz'
 
 setup(
-  name = 'futurepy',
-  packages = ['futurepy'],
+  name='futurepy',
+  packages=['futurepy'],
   version=about['__version__'],
   license='BSD',
-  description = 'An unofficial cli version for FutureMe',
+  description='An unofficial cli version for FutureMe',
   long_description=long_description,
   long_description_content_type='text/markdown',
-  author = 'guiszk',
-  author_email = 'guiszk@protonmail.com',
-  url = 'https://github.com/guiszk/futurepy',
-  download_url = 'https://github.com/guiszk/futurepy/dist/' + download_path,
-  keywords = ['api', 'futureme', 'python'],
+  author='guiszk',
+  author_email='guiszk@protonmail.com',
+  url='https://github.com/guiszk/futurepy',
+  download_url='https://github.com/guiszk/futurepy/dist/' + download_path,
+  keywords=['api', 'futureme', 'python'],
   install_requires=['requests', 'docopt'],
   classifiers=[
     'Development Status :: 3 - Alpha',
